@@ -1,0 +1,228 @@
+ <!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Para mi querida novia ❤️</title>
+  <meta name="description" content="Una página romántica, ligera y con animaciones para ver en celular." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg1:#ffafbd; /* rosa */
+      --bg2:#ffc3a0; /* durazno */
+      --ink:#2a2a2a;
+      --white:#ffffff;
+      --accent:#ff4d6d;
+      --accent-2:#ffa6c9;
+      --glass: rgba(255,255,255,.25);
+      --shadow: 0 10px 30px rgba(0,0,0,.15);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:Poppins, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color:var(--ink);
+      overflow-x:hidden; background: linear-gradient(120deg,var(--bg1),var(--bg2));
+      background-size: 200% 200%; animation: bgMove 10s ease-in-out infinite;
+    }
+    @keyframes bgMove { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+
+    /* Contenedor principal */
+    .wrap{ max-width:920px; margin:0 auto; padding: clamp(16px, 3vw, 32px); }
+
+    /* Tarjetas de vidrio */
+    .card{ background:var(--glass); backdrop-filter: blur(10px); border:1px solid rgba(255,255,255,.35); border-radius:24px; box-shadow:var(--shadow); padding: clamp(18px,3.5vw,36px); }
+
+    /* Hero */
+    header.hero{ position:relative; min-height: 88vh; display:grid; place-items:center; text-align:center; }
+    .title{ font-size: clamp(28px, 6.5vw, 68px); line-height:1.05; margin:0 0 10px; color:#1f1f1f; text-shadow:0 2px 20px rgba(255,255,255,.6) }
+    .subtitle{ font-size: clamp(16px, 3.7vw, 24px); opacity:.9; margin:0 auto; max-width: 32ch; }
+    .cta{
+      display:inline-block; margin-top:22px; padding:14px 22px; border-radius:999px; border:0; font-weight:700; font-size:16px;
+      background:linear-gradient(90deg, var(--accent), var(--accent-2)); color:white; box-shadow:0 10px 20px rgba(255,77,109,.35);
+      transform: translateY(0); transition: transform .2s ease, filter .2s ease; text-decoration:none
+    }
+    .cta:active{ transform: translateY(2px); filter:saturate(1.1) }
+
+    /* Corazones flotantes */
+    .hearts{ position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden }
+    .heart{ position:absolute; font-size: clamp(16px, 5vw, 28px); animation: floatUp linear infinite; opacity:.75;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,.15)); }
+    @keyframes floatUp{ 0%{ transform: translateY(10vh) scale(.8) rotate(0deg); opacity:0 } 10%{opacity:.8}
+      100%{ transform: translateY(-120vh) scale(1.2) rotate(360deg); opacity:0 } }
+
+    /* Secciones */
+    section{ position:relative; z-index:1; margin: clamp(24px, 5vw, 48px) 0; }
+    h2{ margin:0 0 12px; font-size: clamp(22px, 5vw, 34px) }
+    p{ line-height:1.7; font-size: clamp(15px, 3.8vw, 18px) }
+
+    /* Galería */
+    .grid{ display:grid; gap:12px; grid-template-columns: repeat(2,1fr) }
+    @media (min-width:720px){ .grid{ grid-template-columns: repeat(4,1fr) } }
+    .ph{ aspect-ratio:1/1; border-radius:18px; overflow:hidden; position:relative; background:rgba(255,255,255,.55); border:1px solid rgba(255,255,255,.6) }
+    .ph img{ width:100%; height:100%; object-fit:cover; display:block; filter: saturate(1.05) }
+
+    /* Frases animadas */
+    .marquee{ --speed: 30s; display:flex; overflow:hidden; gap:24px; white-space:nowrap; padding:10px 0 }
+    .marquee .track{ display:flex; gap:24px; animation: move var(--speed) linear infinite; }
+    @keyframes move{ from{ transform: translateX(0) } to{ transform: translateX(-50%) } }
+    .chip{ background:rgba(255,255,255,.7); border:1px solid rgba(255,255,255,.9); padding:10px 14px; border-radius:999px; font-weight:600 }
+
+    /* Reveal on scroll */
+    .reveal{ opacity:0; transform: translateY(20px) scale(.98); transition: opacity .7s ease, transform .7s ease }
+    .reveal.show{ opacity:1; transform: translateY(0) scale(1) }
+
+    /* Footer */
+    footer{ text-align:center; font-size:14px; opacity:.85; padding-bottom:28px }
+
+    /* Modal */
+    dialog{ border:none; border-radius:20px; background:rgba(255,255,255,.95); box-shadow:var(--shadow); max-width: 520px; width: 92vw; padding:22px }
+    dialog::backdrop{ background: rgba(0,0,0,.35) }
+    .modal-title{ margin:0 0 8px; font-size:24px; font-weight:800 }
+    .modal-text{ margin:0 0 16px }
+    .close{ cursor:pointer; border:0; padding:8px 14px; border-radius:12px; background:#111; color:#fff; font-weight:700 }
+
+  </style>
+</head>
+<body>
+  <!-- Corazones flotantes -->
+  <div class="hearts" aria-hidden="true" id="hearts"></div>
+
+  <div class="wrap">
+    <header class="hero">
+      <div class="card reveal" style="text-align:center">
+        <h1 class="title">Para mi querida novia 💖</h1>
+        <p class="subtitle">Esta es una pequeña sorpresa hecha con amor, para recordarte que eres lo mejor que me pasó. 🌙✨</p>
+        <a class="cta" href="#momentos">Ver nuestros momentitos</a>
+      </div>
+    </header>
+
+    <section id="promesas" class="reveal">
+      <div class="card">
+        <h2>Nuestras promesas ✨</h2>
+        <p>Prometo cuidarte, escucharte y celebrar tus logros. Prometo abrazarte más fuerte en los días difíciles y reír contigo hasta que duela la panza. Hoy y cada día. 🥰</p>
+      </div>
+    </section>
+
+    <section id="frases" class="reveal">
+      <div class="card">
+        <h2>Palabras que me recuerdan a ti</h2>
+        <div class="marquee" role="marquee" aria-label="Frases de amor desplazándose">
+          <div class="track">
+            <span class="chip">Eres mi hogar</span>
+            <span class="chip">Contigo todo es mejor</span>
+            <span class="chip">Tu risa es mi canción</span>
+            <span class="chip">Mi persona favorita</span>
+            <span class="chip">Siempre a tu lado</span>
+            <span class="chip">Te elijo todos los días</span>
+            <!-- duplicado para bucle suave -->
+            <span class="chip">Eres mi hogar</span>
+            <span class="chip">Contigo todo es mejor</span>
+            <span class="chip">Tu risa es mi canción</span>
+            <span class="chip">Mi persona favorita</span>
+            <span class="chip">Siempre a tu lado</span>
+            <span class="chip">Te elijo todos los días</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="momentos" class="reveal">
+      <div class="card">
+        <h2>Nuestros momentitos 📸</h2>
+        <p>Puedes reemplazar las fotos por las tuyas. Solo toca cada imagen y elige la foto desde tu celular.</p>
+        <div class="grid" id="galeria">
+          <!-- Placeholders con input file encima para cambiar desde el móvil -->
+          <label class="ph"><img src="https://images.unsplash.com/photo-1516542076529-1ea3854896e1?q=80&w=800&auto=format&fit=crop" alt="Recuerdo 1"><input type="file" accept="image/*" hidden></label>
+          <label class="ph"><img src="https://images.unsplash.com/photo-1513194971081-8cf6a9d0b3c8?q=80&w=800&auto=format&fit=crop" alt="Recuerdo 2"><input type="file" accept="image/*" hidden></label>
+          <label class="ph"><img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=800&auto=format&fit=crop" alt="Recuerdo 3"><input type="file" accept="image/*" hidden></label>
+          <label class="ph"><img src="https://images.unsplash.com/photo-1484591974057-265bb767ef71?q=80&w=800&auto=format&fit=crop" alt="Recuerdo 4"><input type="file" accept="image/*" hidden></label>
+        </div>
+      </div>
+    </section>
+
+    <section id="carta" class="reveal">
+      <div class="card">
+        <h2>Cartita para ti 💌</h2>
+        <p id="texto-carta">Desde que llegaste, todo tiene más color. Gracias por ser tú, por tu luz y por cada momento que compartimos. Te amo.</p>
+        <button class="cta" id="abrir">Abrir un mensajito</button>
+      </div>
+    </section>
+
+    <footer class="reveal">
+      <p class="card">Hecho con mucho amor por mí, para ti. 🌹</p>
+    </footer>
+  </div>
+
+  <!-- Modal -->
+  <dialog id="modal">
+    <h3 class="modal-title">Un secreto… 🤫</h3>
+    <p class="modal-text">Si pudiera elegir de nuevo, te volvería a elegir mil veces. Gracias por existir, amorcito. 💗</p>
+    <button class="close" id="cerrar">Cerrar</button>
+  </dialog>
+
+  <script>
+    // Corazones flotando aleatorios
+    const hearts = "❤️ 💖 💘 💝 💗".split(" ");
+    const heartsContainer = document.getElementById('hearts');
+    const HEARTS_COUNT = 18; // ajusta cantidad
+    function spawnHearts(){
+      for(let i=0;i<HEARTS_COUNT;i++){
+        const span = document.createElement('span');
+        span.className = 'heart';
+        span.textContent = hearts[Math.floor(Math.random()*hearts.length)];
+        resetHeart(span, true);
+        heartsContainer.appendChild(span);
+        span.addEventListener('animationend', ()=> resetHeart(span));
+      }
+    }
+    function resetHeart(el, initial=false){
+      const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+      const left = Math.random() * vw;
+      const duration = 8 + Math.random()*8; // 8-16s
+      const delay = initial ? Math.random()*duration : 0;
+      el.style.left = left + 'px';
+      el.style.bottom = '-10vh';
+      el.style.animationDuration = duration + 's';
+      el.style.animationDelay = delay + 's';
+      el.style.opacity = 0.6 + Math.random()*0.4;
+      el.style.transform = 'translateY(10vh) scale(' + (0.8 + Math.random()*0.6) + ')';
+    }
+    spawnHearts();
+
+    // Reveal on scroll con IntersectionObserver
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); } });
+    },{ threshold:.12 });
+    document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
+
+    // Modal
+    const modal = document.getElementById('modal');
+    document.getElementById('abrir').addEventListener('click', ()=> modal.showModal());
+    document.getElementById('cerrar').addEventListener('click', ()=> modal.close());
+
+    // Galería: permitir cambiar fotos desde el móvil
+    document.querySelectorAll('.ph').forEach(ph=>{
+      const input = ph.querySelector('input[type="file"]');
+      ph.addEventListener('click', ()=> input && input.click());
+      input && input.addEventListener('change', (e)=>{
+        const file = e.target.files[0];
+        if(!file) return;
+        const img = ph.querySelector('img');
+        img.src = URL.createObjectURL(file); // vista previa inmediata
+        img.onload = ()=> URL.revokeObjectURL(img.src);
+      });
+    });
+
+    // Navegación suave para el botón CTA
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', (e)=>{
+        const id = a.getAttribute('href');
+        const target = document.querySelector(id);
+        if(target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth'}); }
+      })
+    })
+  </script>
+</body>
+</html>
